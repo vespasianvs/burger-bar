@@ -1,0 +1,18 @@
+.NavigationItems {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex: row nowrap;
+    justify-content: flex-end;
+    align-content: center;
+    text-align:left;
+}
+
+@media (max-width: 750px) {
+    .NavigationItems {
+        display: block;
+        width: 186px;
+        justify-content: flex-start;
+        align-content: flex-end;
+    }
+}

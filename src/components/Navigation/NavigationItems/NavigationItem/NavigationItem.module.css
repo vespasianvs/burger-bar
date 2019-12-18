@@ -1,0 +1,31 @@
+.NavigationItem {
+    list-style-type: none;
+    height: 100%;
+}
+
+
+.NavigationItem a {
+    text-decoration: none;
+    height: 100%;
+    color: white;
+    line-height: 56px;
+    display: block;
+    padding: 0 10px;
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+    background-color: #737373;
+    border-bottom: 2px solid white;
+}
+
+@media (max-width: 750px) {
+    .NavigationItem a:hover,
+    .NavigationItem a:active,
+    .NavigationItem a.active {
+        background-color: #737373;
+        border-right: 2px solid white;
+        border-bottom: none;
+    }
+}

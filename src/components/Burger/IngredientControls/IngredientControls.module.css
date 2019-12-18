@@ -1,0 +1,47 @@
+.ControlGroup {
+    width: 60vw;
+    border: 1px solid black;
+    box-shadow: 3px 3px 5px #2e2e1f, 3px 3px 8px #a2a276;
+    margin: 10px auto;
+    box-sizing: border-box;
+    padding: 5px;
+    background: white;
+}
+
+.Control {
+    border-bottom: 1px solid black;
+    margin: 0px auto;
+    padding: 5px;
+    width: 100%;
+    line-height: 2rem;
+    text-align: left;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 2fr 1fr 30px 50px 1fr 1fr;
+}
+
+.Last {
+    border-bottom: none;
+}
+
+.Centered {
+    text-align:center;
+}
+
+.Control i {
+    font-size: 2rem;
+}
+
+button {
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    background: transparent;
+}
+
+@media (max-width: 750px) {
+    .ControlGroup {
+        width: 95vw;
+        font-size: 0.8rem;
+    }
+}

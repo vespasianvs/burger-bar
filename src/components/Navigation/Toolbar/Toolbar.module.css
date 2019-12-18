@@ -1,0 +1,39 @@
+.Toolbar {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(#000000, #262626);
+    color: white;
+    display: grid;
+    grid-template-columns: 6fr 1fr 6fr;
+    line-height: 56px;
+    text-align: left;
+    z-index: 200;
+}
+
+.MenuToggle {
+    display: none;
+    color: white;
+    font-size: 25px;
+    height: 56px;
+    background: transparent;
+    box-sizing: border-box;
+    padding: 0 15px;
+    text-align: left;
+}
+
+@media (max-width: 750px) {
+    .Toolbar {
+        grid-template-columns: 2fr 1fr 2fr;
+    }
+
+    .Toolbar nav {
+        display:none;
+    }
+
+    .MenuToggle {
+        display: block;
+    }
+}
