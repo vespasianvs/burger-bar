@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classes from './Modal.module.css';
 
 const Modal = (props) => {
@@ -14,4 +14,8 @@ const Modal = (props) => {
     )
 }
 
-export default Modal;
+const shouldUpdate = (prevProps, nextProps) => {
+    return prevProps.show === nextProps.show;
+}
+
+export default memo(Modal, shouldUpdate);
