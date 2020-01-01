@@ -2,3 +2,10 @@
     position: relative;
     padding-top: 30px;
 }
+
+.TraceSpinner {
+    width: 49.5px;
+    height: 49.5px;
+    margin: 200px auto!important;
+    text-align:center;
+}

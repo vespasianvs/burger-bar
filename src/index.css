@@ -46,3 +46,22 @@ body {
   background-color: gray;
   color: black;
 }
+
+.CloseX {
+  border: 1px solid red;
+  background-color: red;
+  color: white;
+  font-size: small;
+  padding: 5px;
+}
+
+.CloseX:hover {
+  background-color: #ff4d4d;
+  color: black
+}
+
+.CloseX:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+  color: black;
+}

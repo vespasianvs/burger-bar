@@ -3,16 +3,16 @@ import IngredientControl from './IngredientControl/IngredientControl';
 import classes from './IngredientControls.module.css';
 
 const ingredientControls = props => {
-    const controls = props.types.map((value, index) => {
+    const controls = Object.entries(props.types).map((value, index) => {
                         return (
                         <IngredientControl 
-                            type={value.type} 
-                            name={value.displayName}
-                            price={value.price}
+                            type={value[0]} 
+                            name={value[1].displayName}
+                            price={value[1].price}
                             index={index} 
-                            key={`item-${value.type}`} 
-                            addIngredient={props.addIngredient.bind(this, value.type, value.price)}
-                            removeIngredient={props.removeIngredient.bind(this, value.type, value.price)} />
+                            key={`item-${value[0]}`} 
+                            addIngredient={props.addIngredient.bind(this, value[0], value[1].price)}
+                            removeIngredient={props.removeIngredient.bind(this, value[0], value[1].price)} />
                         )
                     })
 

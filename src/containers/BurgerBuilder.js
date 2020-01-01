@@ -7,24 +7,35 @@ import Modal from '../components/UI/Modal/Modal';
 import Backdrop from '../components/UI/Backdrop/Backdrop';
 import OrderSummary from '../components/Burger/OrderSummary/OrderSummary';
 import classes from './BurgerBuilder.module.css';
+import AxiosDB from '../axiosDB';
+import { TraceSpinner } from 'react-spinners-kit';
+import withErrorHandler from '../hoc/withErrorHandler/withErrorHandler';
 
 class BurgerBuilder extends Component {
+
     state = {
         ingredients: [],
+        ingredientTypes: [],
         totalPrice: 0,
-        purchasing: false
+        purchasing: false,
+        loading: true,
+        error: null
     }
 
     static contextType = BurgerContext;
 
-    ingredientTypes = [
-        {displayName: "Beef Burger", type: "BeefBurger", price: 100}, 
-        {displayName: "Veggie Burger", type: "VeggieBurger", price: 100},
-        {displayName: "Cheese", type: "Cheese", price: 50}, 
-        {displayName: "Bacon", type: "Bacon", price: 75},
-        {displayName: "Lettuce", type: "Lettuce", price: 30},
-        {displayName: "Tomato", type: "Tomato", price: 40}
-    ];
+    componentDidMount() {
+        AxiosDB.get('https://burger-bar-b2f01.firebaseio.com/ingredients.json')
+            .then(response => {
+                this.setState({
+                    ingredientTypes: response.data,
+                    loading: false
+                });
+            })
+            .catch(error => {
+                this.setState({error:error, loading: false})
+            })
+    }
 
     addIngredientHandler = (ingredient, price, event) => {
         this.setState((prevState, props) => {
@@ -74,30 +85,76 @@ class BurgerBuilder extends Component {
     }
 
     orderPurchaseHandler = () => {
-        this.context.order.push([...this.state.ingredients])
 
-        this.setState({
-            ingredients: [],
-            totalPrice: 0,
-            purchasing: false
-        });
+        this.setState({loading: true})
 
-        this.context.burger = {
-            BeefBurger: 0,
-            VeggieBurger: 0,
-            Cheese: 0,
-            Bacon: 0,
-            Lettuce: 0,
-            Tomato: 0
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.price,
+            customer: {
+                name: "Andy Cork",
+                address: {
+                    house: "12",
+                    street: "Letsby Avenue",
+                    city: "Tinkertown",
+                    postcode: "TT23 6BY"
+                },
+                telephone: "01234 787657",
+                email: "andy@tinkertown.com"
+            },
+            deliveryMethod: "JustEat"
         }
+        
+        AxiosDB.post('/orders.json', order)
+            .then(response => {
+                console.log(response)
+        
+                this.context.burger = {
+                    BeefBurger: 0,
+                    VeggieBurger: 0,
+                    Cheese: 0,
+                    Bacon: 0,
+                    Lettuce: 0,
+                    Tomato: 0
+                }
+
+                this.setState({
+                    ingredients: [],
+                    totalPrice: 0,
+                    purchasing: false,
+                    loading:false
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    loading:false
+                });
+                console.error(error);
+            })
     }
 
     render() {
+        let orderSummary = <OrderSummary order={this.orderPurchaseHandler} cancel={this.cancelPurchaseHandler} ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} />
+        let burgerControls = (<IngredientControls 
+                                types={this.state.ingredientTypes} 
+                                totalPrice={this.state.totalPrice}
+                                addIngredient={this.addIngredientHandler} 
+                                removeIngredient={this.removeIngredientHandler}
+                                />)
+        if (this.state.loading) {
+            orderSummary = <div className={classes.TraceSpinner}><TraceSpinner frontColor='#5C2E00' backColor='#DF8600' /></div>
+            burgerControls = <div className={classes.TraceSpinner}><TraceSpinner frontColor='#5C2E00' backColor='#DF8600' /></div>
+        }
+
+        if (this.state.error) {
+            burgerControls = <div>Could not load the ingredients: {this.state.error.message}</div>
+        }
+
         return (
             <div className={classes.BurgerBuilder}>
                 <Backdrop show={this.state.purchasing} cancel={this.cancelPurchaseHandler}/>
-                <Modal show={this.state.purchasing}>
-                    <OrderSummary order={this.orderPurchaseHandler} cancel={this.cancelPurchaseHandler} ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} />
+                <Modal show={this.state.purchasing} cancel={this.cancelPurchaseHandler}>
+                    {orderSummary}
                 </Modal>
                 <BurgerContext.Provider 
                     value={{
@@ -113,16 +170,11 @@ class BurgerBuilder extends Component {
                     }} >
                     <Burger ingredients={this.state.ingredients} onSortEnd={this.onSortEnd} />
                 </BurgerContext.Provider>
-                <IngredientControls 
-                        types={this.ingredientTypes} 
-                        totalPrice={this.state.totalPrice}
-                        addIngredient={this.addIngredientHandler} 
-                        removeIngredient={this.removeIngredientHandler}
-                        />
+                {burgerControls}
                 <button className='DefaultButton' onClick={this.orderHandler} disabled={this.state.ingredients.length===0}>ORDER NOW</button>
             </div>
         );
     }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, AxiosDB);
