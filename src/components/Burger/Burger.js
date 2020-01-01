@@ -14,7 +14,7 @@ const burger = props => {
                         key={`item-${ingredient}-${index}`} 
                         index={index} 
                         type={ingredient}
-                        disabled={false}
+                        disabled={!props.sortable}
                         />;
         })
     }
@@ -36,7 +36,6 @@ const burger = props => {
                 index={1}
                 disabled={true}
             />
-            <strong>Drag ingredients around to stack your burger YOUR way!</strong>
         </div>
 )}
 

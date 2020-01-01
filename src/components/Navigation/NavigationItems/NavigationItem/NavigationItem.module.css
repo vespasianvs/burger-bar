@@ -3,7 +3,6 @@
     height: 100%;
 }
 
-
 .NavigationItem a {
     text-decoration: none;
     height: 100%;
@@ -11,6 +10,15 @@
     line-height: 56px;
     display: block;
     padding: 0 10px;
+    position: relative;
+}
+
+.NavigationItem a>div {
+    display:none;
+}
+
+.NavigationItem a:hover>div {
+    display:block;
 }
 
 .NavigationItem a:hover,

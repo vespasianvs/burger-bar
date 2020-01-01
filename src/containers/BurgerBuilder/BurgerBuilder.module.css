@@ -1,6 +1,12 @@
 .BurgerBuilder {
     position: relative;
     padding-top: 30px;
+    height: 100%;
+}
+
+.BurgerContainer {
+    width: 40%;
+    margin: 0 auto;
 }
 
 .TraceSpinner {

@@ -1,11 +1,10 @@
 .Burger {
-    width: 30vw;
     margin: 0px auto;
 }
 
 @media (max-width: 750px) {
     .Burger {
-        width: 90vw;
+        width: 90%;
     }
 
     h2 {

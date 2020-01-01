@@ -10,6 +10,7 @@ const ingredientControls = props => {
                             name={value[1].displayName}
                             price={value[1].price}
                             index={index} 
+                            count={props.ingredients.filter(val => val === value[0]).length}
                             key={`item-${value[0]}`} 
                             addIngredient={props.addIngredient.bind(this, value[0], value[1].price)}
                             removeIngredient={props.removeIngredient.bind(this, value[0], value[1].price)} />

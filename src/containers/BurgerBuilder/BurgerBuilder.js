@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import Burger from '../components/Burger/Burger';
-import IngredientControls from '../components/Burger/IngredientControls/IngredientControls';
+import Burger from '../../components/Burger/Burger';
+import IngredientControls from '../../components/Burger/IngredientControls/IngredientControls';
 import arrayMove from 'array-move';
-import BurgerContext from '../hoc/burgerContext/burgerContext'
-import Modal from '../components/UI/Modal/Modal';
-import Backdrop from '../components/UI/Backdrop/Backdrop';
-import OrderSummary from '../components/Burger/OrderSummary/OrderSummary';
+import BurgerContext from '../../hoc/burgerContext/burgerContext'
+import Modal from '../../components/UI/Modal/Modal';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import classes from './BurgerBuilder.module.css';
-import AxiosDB from '../axiosDB';
+import AxiosDB from '../../axiosDB'
 import { TraceSpinner } from 'react-spinners-kit';
-import withErrorHandler from '../hoc/withErrorHandler/withErrorHandler';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 class BurgerBuilder extends Component {
 
@@ -25,7 +25,7 @@ class BurgerBuilder extends Component {
     static contextType = BurgerContext;
 
     componentDidMount() {
-        AxiosDB.get('https://burger-bar-b2f01.firebaseio.com/ingredients.json')
+        AxiosDB.get('/ingredients.json')
             .then(response => {
                 this.setState({
                     ingredientTypes: response.data,
@@ -40,7 +40,6 @@ class BurgerBuilder extends Component {
     addIngredientHandler = (ingredient, price, event) => {
         this.setState((prevState, props) => {
             prevState.ingredients.splice(0, 0, ingredient);
-            this.context.burger[ingredient]+=1;
 
             return {
                 ingredients: prevState.ingredients,
@@ -55,7 +54,6 @@ class BurgerBuilder extends Component {
 
             if(index >= 0) {
                 prevState.ingredients.splice(index, 1);
-                this.context.burger[ingredient]-=1;
 
                 return {
                     ingredients: prevState.ingredients,
@@ -86,7 +84,7 @@ class BurgerBuilder extends Component {
 
     orderPurchaseHandler = () => {
 
-        this.setState({loading: true})
+        /*this.setState({loading: true})
 
         const order = {
             ingredients: this.state.ingredients,
@@ -130,13 +128,23 @@ class BurgerBuilder extends Component {
                     loading:false
                 });
                 console.error(error);
-            })
+            })*/
+
+            this.context.addOrder(this.state.ingredients, this.state.totalPrice)
+
+            this.setState({
+                ingredients: [],
+                totalPrice: 0,
+                purchasing: false,
+                loading:false
+            });
     }
 
     render() {
         let orderSummary = <OrderSummary order={this.orderPurchaseHandler} cancel={this.cancelPurchaseHandler} ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} />
         let burgerControls = (<IngredientControls 
                                 types={this.state.ingredientTypes} 
+                                ingredients={this.state.ingredients}
                                 totalPrice={this.state.totalPrice}
                                 addIngredient={this.addIngredientHandler} 
                                 removeIngredient={this.removeIngredientHandler}
@@ -156,20 +164,10 @@ class BurgerBuilder extends Component {
                 <Modal show={this.state.purchasing} cancel={this.cancelPurchaseHandler}>
                     {orderSummary}
                 </Modal>
-                <BurgerContext.Provider 
-                    value={{
-                        burger: {
-                            BeefBurger: 0,
-                            VeggieBurger: 0,
-                            Cheese: 0,
-                            Bacon: 0,
-                            Lettuce: 0,
-                            Tomato: 0
-                        },
-                        order: []
-                    }} >
-                    <Burger ingredients={this.state.ingredients} onSortEnd={this.onSortEnd} />
-                </BurgerContext.Provider>
+                <div className={classes.BurgerContainer}>
+                    <Burger sortable={true} ingredients={this.state.ingredients} onSortEnd={this.onSortEnd} />
+                </div>
+                <strong>Drag ingredients around to stack your burger YOUR way!</strong>
                 {burgerControls}
                 <button className='DefaultButton' onClick={this.orderHandler} disabled={this.state.ingredients.length===0}>ORDER NOW</button>
             </div>

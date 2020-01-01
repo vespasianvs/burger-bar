@@ -1,35 +1,12 @@
 import React from 'react';
-import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
-import {SortableContainer} from 'react-sortable-hoc';
-import classes from './OrderSummary.module.css';
+import Burger from '../Burger';
 
 const OrderSummary = (props) => {
     return (
         <div>
             <h1>Your Order</h1>
-            <div className={classes.Burger}>
-                <BurgerIngredient 
-                    key="BunTop" 
-                    type="BunTop"
-                    collection="Buns"
-                    index={0}
-                    disabled={true}
-                />
-                {props.ingredients.map((ingredient, index) => {
-                    return <BurgerIngredient 
-                                key={`item-${ingredient}-${index}`} 
-                                index={index} 
-                                type={ingredient}
-                                disabled={true}
-                                />;
-                })}
-                <BurgerIngredient 
-                    key="BunBottom" 
-                    type="BunBottom"
-                    collection="Buns"
-                    index={1}
-                    disabled={true}
-                />
+            <div style={{width:'50%', margin: '0 auto'}} >
+                <Burger sortable={false} ingredients={props.ingredients} />
             </div>
             <div>Total Cost: £{(props.totalPrice/100).toFixed(2)}</div>
             <div>
@@ -40,4 +17,4 @@ const OrderSummary = (props) => {
     );
 }
 
-export default SortableContainer(OrderSummary);
+export default OrderSummary;
