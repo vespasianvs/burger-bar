@@ -1,0 +1,10 @@
+h3 {
+    border-bottom: 1px solid #737373;
+}
+
+.TraceSpinner {
+    width: 49.5px;
+    height: 49.5px;
+    margin: 200px auto!important;
+    text-align:center;
+}

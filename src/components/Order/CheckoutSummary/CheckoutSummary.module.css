@@ -1,4 +1,32 @@
+.ItemRow {
+    display: flex;
+    flex: row nowrap;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    border-bottom: 1px solid black;
+}
+
 .Burger {
-    width: 40%;
-    margin: 0 auto;
+    flex: 1 1 auto;
+}
+
+.Price {
+    flex: 1 1 auto;
+}
+
+.TotalRow {
+    display: flex;
+    flex: row nowrap;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+@media (max-width: 750px) {
+    .BasketPopup {
+        display: none;
+    }
 }

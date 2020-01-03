@@ -15,6 +15,13 @@
 
 .NavigationItem a>div {
     display:none;
+    background: #737373;
+    color: white;
+    position: absolute;
+    left: 0px;
+    z-index: 500;
+    width: 200px;
+    box-sizing: border-box;
 }
 
 .NavigationItem a:hover>div {
@@ -35,5 +42,9 @@
         background-color: #737373;
         border-right: 2px solid white;
         border-bottom: none;
+    }
+
+    .NavigationItem a:hover>div {
+        display:none;
     }
 }

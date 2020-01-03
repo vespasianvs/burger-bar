@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +11,16 @@ body {
   font-family: 'Titillium Web', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('./assets/chopping-board.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .DefaultButton {
@@ -15,6 +29,8 @@ body {
   color: white;
   padding: 10px;
   margin: 5px;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .DefaultButton:hover {
@@ -34,6 +50,8 @@ body {
   color: white;
   padding: 10px;
   margin: 5px;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .CancelButton:hover {

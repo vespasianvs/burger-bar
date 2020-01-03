@@ -1,0 +1,30 @@
+.formRow {
+    display:grid;
+    grid-template-columns: 2fr 3fr;
+    padding: 5px 0px;
+    width: 100%;
+    text-align:left;
+}
+
+.InputElement {
+    width: 100%;
+    border: 1px solid #737373;
+}
+
+.HasError {
+    border: 1px solid red;
+    background: #ff9999;
+}
+
+@media (max-width:576px) {
+    .formRow {
+        display:block;
+        padding: 5px 0px;
+        width: 100%;
+        text-align:left;
+    }
+    
+    label {
+        display: none;
+    }
+}

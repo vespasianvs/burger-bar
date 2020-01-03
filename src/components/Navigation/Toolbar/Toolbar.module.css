@@ -24,7 +24,7 @@
     text-align: left;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 775px) {
     .Toolbar {
         grid-template-columns: 2fr 1fr 2fr;
     }

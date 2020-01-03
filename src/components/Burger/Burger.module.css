@@ -2,16 +2,6 @@
     margin: 0px auto;
 }
 
-@media (max-width: 750px) {
-    .Burger {
-        width: 90%;
-    }
-
-    h2 {
-        font-size: 1.1rem;
-    }
-
-    strong {
-        font-size: 0.8rem;
-    }
+h2 {
+    font-size: 1.1rem;
 }

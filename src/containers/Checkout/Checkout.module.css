@@ -1,0 +1,15 @@
+.Checkout {
+    width: 100%;
+    margin: 50px auto;
+    background: white;
+    color: black;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 5px #2e2e1f, 3px 3px 8px #a2a276;
+}
+
+@media (min-width:576px){
+    .Checkout {
+        width: 500px;
+    }
+}

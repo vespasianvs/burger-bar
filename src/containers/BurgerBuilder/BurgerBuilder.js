@@ -21,7 +21,7 @@ class BurgerBuilder extends Component {
         loading: true,
         error: null
     }
-
+    
     static contextType = BurgerContext;
 
     componentDidMount() {
@@ -83,53 +83,6 @@ class BurgerBuilder extends Component {
     }
 
     orderPurchaseHandler = () => {
-
-        /*this.setState({loading: true})
-
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.price,
-            customer: {
-                name: "Andy Cork",
-                address: {
-                    house: "12",
-                    street: "Letsby Avenue",
-                    city: "Tinkertown",
-                    postcode: "TT23 6BY"
-                },
-                telephone: "01234 787657",
-                email: "andy@tinkertown.com"
-            },
-            deliveryMethod: "JustEat"
-        }
-        
-        AxiosDB.post('/orders.json', order)
-            .then(response => {
-                console.log(response)
-        
-                this.context.burger = {
-                    BeefBurger: 0,
-                    VeggieBurger: 0,
-                    Cheese: 0,
-                    Bacon: 0,
-                    Lettuce: 0,
-                    Tomato: 0
-                }
-
-                this.setState({
-                    ingredients: [],
-                    totalPrice: 0,
-                    purchasing: false,
-                    loading:false
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    loading:false
-                });
-                console.error(error);
-            })*/
-
             this.context.addOrder(this.state.ingredients, this.state.totalPrice)
 
             this.setState({
@@ -140,7 +93,7 @@ class BurgerBuilder extends Component {
             });
     }
 
-    render() {
+    render() {console.log(this.props);
         let orderSummary = <OrderSummary order={this.orderPurchaseHandler} cancel={this.cancelPurchaseHandler} ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} />
         let burgerControls = (<IngredientControls 
                                 types={this.state.ingredientTypes} 

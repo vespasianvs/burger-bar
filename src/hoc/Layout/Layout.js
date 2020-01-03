@@ -21,7 +21,7 @@ class layout extends Component {
     cancelSidebarHandler = (event) => {
         this.setState({sideDrawerVisible: false});
     }
-    
+
     render() {
         return (
             <BurgerProvider>

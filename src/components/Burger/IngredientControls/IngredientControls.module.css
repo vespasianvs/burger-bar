@@ -1,5 +1,5 @@
 .ControlGroup {
-    width: 60vw;
+    width: 100%;
     border: 1px solid black;
     box-shadow: 3px 3px 5px #2e2e1f, 3px 3px 8px #a2a276;
     margin: 10px auto;
@@ -37,11 +37,4 @@ button {
     padding: 0px;
     margin: 0px;
     background: transparent;
-}
-
-@media (max-width: 750px) {
-    .ControlGroup {
-        width: 95vw;
-        font-size: 0.8rem;
-    }
 }

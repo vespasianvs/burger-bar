@@ -1,4 +1,5 @@
 .content {
     margin-top: 56px;
-    
+    height: calc(100% - 56px);
+    overflow: auto;
 }
